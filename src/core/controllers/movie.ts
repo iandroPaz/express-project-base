@@ -4,7 +4,7 @@ import { createMovie, findAllWithPagination, findOneMovieById } from "../service
 
 const routes = express.Router();
 
-routes.post('/', async (req, res) =>{
+routes.post('/movie', async (req, res) =>{
     const movie = req.body;
     const response = await checkMovie(movie);
     if (response === null || response === undefined)
@@ -17,7 +17,7 @@ routes.post('/', async (req, res) =>{
     }
 })
 
-routes.get('/:id', async (req, res) =>{
+routes.get('/movie/:id', async (req, res) =>{
     const movieId = req.params.id;
     let response = null;
     try{
@@ -29,7 +29,7 @@ routes.get('/:id', async (req, res) =>{
     }
 });
 
-routes.get('/movies/all', async (req, res) =>{
+routes.get('/movies', async (req, res) =>{
     const { limit, offset } = req.body;
     let response = null;
     try{
