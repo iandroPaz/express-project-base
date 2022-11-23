@@ -1,4 +1,5 @@
 import './core/db/database';
+import './core/mechanisms/requests';
 import * as express from 'express';
 import * as cors from 'cors';
 import bodyParser = require("body-parser");

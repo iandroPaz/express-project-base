@@ -1,25 +1,29 @@
-import { keys } from '../utils/constants';
+import { createMovie } from '../services/movie';
 import { instance } from '../utils/api';
-import { IDataWeather } from '../utils/types';
+import { IMovie } from '../utils/types';
 
-export const getDataWeather = async (city:String) => {
-  let formatWeather:IDataWeather = {
-    temperatura: 0, 
-    cidade: '', 
-    ur: 0 
-  }
+(async () => {
+  let movies = []
   const params = {
-    access_key: keys.API_KEY,
-    query: city
+    fields: `id,title,original_title,description,release_date,rt_score`,
+    limit: 200
+  };
+
+  try {
+    const response = await instance.get('/films', { params });
+    movies = response.data;
+  } catch (e) {
+    console.log('ERROR GET FILMS:', e);
   }
-  console.log("🚀 ~ file: requests.ts ~ line 17 ~ getDataWeather ~ params", params.query)
-  try{
-    
-    const response = await instance.get('http://api.weatherstack.com/current', { params });
-    console.log("🚀 ~ file: requests.ts ~ line 19 ~ getDataWeather ~ response", response)
-  }catch(e){
-    console.log(e)
-  }
-  console.log('api:', formatWeather)
-  return formatWeather;
-}
+
+  movies.forEach(async (movie:IMovie) => {
+    try{
+     await createMovie(movie);
+    }catch (err){
+      console.log('DB ERROR:', err);
+    }
+  });
+
+  console.log("Quantity movies from API:", movies.length);
+
+})();
