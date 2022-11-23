@@ -1,0 +1,18 @@
+{
+    // Eslint
+      "editor.formatOnSave": true,
+      "[javascript]": {
+        "editor.formatOnSave": false,
+      },
+      "[javascriptreact]": {
+        "editor.formatOnSave": false,
+      },
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+      },
+      "eslint.alwaysShowStatus": true,
+
+      "editor.fontFamily": "Fira Code",
+      "editor.fontLigatures": true
+    
+}
