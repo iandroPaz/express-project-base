@@ -1,6 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
 import { database, timezone } from '../utils/constants';
-import { Movie } from './models/movie.models';
 
 const sequelize = new Sequelize(
     database.database,
@@ -12,11 +11,10 @@ const sequelize = new Sequelize(
   },
 );
 
-sequelize.addModels([Movie]);
-
 (async () => {
   try {
     await sequelize.authenticate();
+    await sequelize.sync({ force: true });
     // eslint-disable-next-line no-console
     console.log('Database connection has been established successfully.');
   } catch (err) {
