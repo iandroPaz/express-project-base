@@ -1,27 +1,35 @@
-import {Table, Column, Model, PrimaryKey, IsUUID} from 'sequelize-typescript';
+import {Table, Column, Model, PrimaryKey, IsUUID, DataType} from 'sequelize-typescript';
+import sequelize from '../database';
 export const MovieN = 'Not a model';
 export const NMovie = 'Not a model';
 
-@Table
-export class Movie extends Model { 
-    @IsUUID(4)
-    @PrimaryKey
-    @Column
-    id: string;
+const Movie = sequelize.define('Movie', {
+    id: {
+        primaryKey: true,
+        type: DataType.STRING,
+        allowNull: false
+    },
+    title: {
+        type: DataType.STRING
+    },
+    original_title: {
+        type: DataType.STRING
+    },
+    description: {
+        type: DataType.STRING
+    },
+    release_date: {
+        type: DataType.INTEGER
+    },
+    rt_score: {
+        type: DataType.INTEGER
+    },
 
-    @Column
-    title: string;
+  }, 
+  {
+    tableName: 'tb_movie',
+    timestamps: true,
+  }
+);
 
-    @Column
-    original_title: string;
-
-    @Column
-    description: string;
-
-    @Column
-    release_date: number;
-
-    @Column
-    rt_score: number;
-
-}
+export default Movie;
