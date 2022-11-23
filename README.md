@@ -28,3 +28,6 @@ After start postgres container, in project root run the command:
 'npm run build' to compile TS files in JS files
 
 After all, just run 'npm run start-server'
+
+This´s enough to run the project, the code gonna create a Movie tables on DB and calls API to get Movies to save on DB
+With DB populated, you can have fun!
