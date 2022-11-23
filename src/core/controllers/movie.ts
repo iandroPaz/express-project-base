@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { checkMovie } from "../schemas/checkMovie";
-import { createMovie, findOneMovieById } from "../services/movie";
+import { createMovie, findAllWithPagination, findOneMovieById } from "../services/movie";
 
 const routes = express.Router();
 
@@ -19,10 +19,21 @@ routes.post('/', async (req, res) =>{
 
 routes.get('/:id', async (req, res) =>{
     const movieId = req.params.id;
-    console.log('id:', movieId);
     let response = null;
     try{
         response = await findOneMovieById(movieId)
+        return response !== null ? res.status(200).send(response) : res.status(400).send('Not found movie');
+    }catch(err){
+        console.log('ERROR:', err);
+        return res.sendStatus(500)
+    }
+});
+
+routes.get('/movies/all', async (req, res) =>{
+    const { limit, offset } = req.body;
+    let response = null;
+    try{
+        response = await findAllWithPagination(limit, offset);
         return response !== null ? res.status(200).send(response) : res.status(400).send('Not found movie');
     }catch(err){
         console.log('ERROR:', err);
