@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "df859ca5-e5ee-4ca2-a3a9-417a96fd36ca",
+		"name": "express-project-base",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15248993"
+	},
+	"item": [
+		{
+			"name": "Ghibliapi",
+			"item": [
+				{
+					"name": "Get-Movies-ghibliapi",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ghibliapi.herokuapp.com/films?limit=200&fields=id,title,original_title,description,release_date,rt_score",
+							"protocol": "https",
+							"host": [
+								"ghibliapi",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"films"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "200"
+								},
+								{
+									"key": "fields",
+									"value": "id,title,original_title,description,release_date,rt_score"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create-Movie",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"9f9301c1-e650-47f2-8af9-b1986c14be92\",\n    \"title\": \"string\",\n    \"original_title\": \"string\",\n    \"description\": \"string\",\n    \"release_date\": 1980,\n    \"rt_score\": 89\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/movie/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"movie",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get-Movie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/movie/9f9301c1-e650-47f2-8af9-b1986c14be93",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"movie",
+						"9f9301c1-e650-47f2-8af9-b1986c14be93"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get-All-Movies",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"limit\": 2,\n    \"offset\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/movies/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"movies",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
