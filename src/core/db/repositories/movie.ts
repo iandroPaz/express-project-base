@@ -1,24 +1,24 @@
 import { IMovie } from '../../utils/types';
-import sequelize from '../database';
+import Movie from '../models/movie.models';
 
-export const MovieEntity = sequelize.models.Movie;
+export const MovieEntity = Movie;
 
 export default class MovieRepository {
   static async create(movie:IMovie, options) {
     let movieResponse = null;
     try {
-      movieResponse = MovieEntity.build({ 
+      movieResponse = MovieEntity.create({ 
        id: movie.id,
        title: movie.title,
        original_title: movie.original_title,
        description: movie.description,
        release_date: movie.release_date,
        rt_score: movie.rt_score
-      });
-
-      movieResponse = await movieResponse.save({
-        returning: true,
-      });
+      },
+      {
+        returning:true
+      }
+      );
     } catch (err) {
         console.log('DB ERROR:', err);
     }
