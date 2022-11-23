@@ -1,13 +1,13 @@
 import { IMovie } from '../../utils/types';
-import db from '../database';
+import sequelize from '../database';
 
-export const MovieEntity = db.models.Movie;
+export const MovieEntity = sequelize.models.Movie;
 
 export default class MovieRepository {
   static async create(movie:IMovie, options) {
-    let response = null;
+    let movieResponse = null;
     try {
-      response = MovieEntity.build({ 
+      movieResponse = MovieEntity.build({ 
        id: movie.id,
        title: movie.title,
        original_title: movie.original_title,
@@ -16,14 +16,13 @@ export default class MovieRepository {
        rt_score: movie.rt_score
       });
 
-      response = await response.save({
-        transaction: options ? options.transaction : null,
+      movieResponse = await movieResponse.save({
         returning: true,
       });
     } catch (err) {
         console.log('DB ERROR:', err);
     }
-    return response;
+    return movieResponse;
   }
 
   static async selectOne(options) {
