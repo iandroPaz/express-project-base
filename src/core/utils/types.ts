@@ -6,9 +6,3 @@ export interface IMovie {
     release_date: number;
     rt_score: number;
 }
-
-export interface IDataWeather {
-    temperatura: number, 
-    cidade: string, 
-    ur: number
-}

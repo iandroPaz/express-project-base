@@ -4,7 +4,7 @@ import Movie from '../models/movie.models';
 export const MovieEntity = Movie;
 
 export default class MovieRepository {
-  static async create(movie:IMovie, options) {
+  static async create(movie:IMovie) {
     let movieResponse = null;
     try {
       movieResponse = MovieEntity.create({ 
@@ -24,7 +24,7 @@ export default class MovieRepository {
     }
     return movieResponse;
   }
-
+  
   static async selectOne(options) {
     let response = null;
     try {
